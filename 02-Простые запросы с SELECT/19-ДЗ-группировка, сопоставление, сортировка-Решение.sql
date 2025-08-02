@@ -1,61 +1,45 @@
-SELECT *
-FROM orders
-WHERE ship_country LIKE 'U%';
+-- 1
+SELECT * FROM orders WHERE ship_country LIKE 'U%';
 
-SELECT order_id, customer_id, freight, ship_country
-FROM orders
-WHERE ship_country LIKE 'N%'
-ORDER BY freight DESC;
-LIMIT 10
+-- 2
+SELECT order_id, customer_id, freight, ship_country FROM orders
+WHERE ship_country LIKE 'N%' 
+ORDER BY freight DESC
+LIMIT 10;
 
-SELECT first_name, last_name, home_phone
-FROM employees
-WHERE region IS NULL
+-- 3 
+SELECT last_name, first_name, home_phone, region FROM employees
+WHERE region IS NULL;
 
-SELECT COUNT(*)
-FROM customers
-WHERE region IS NOT NULL
+-- 4
+SELECT COUNT(*) FROM customers WHERE region IS NOT NULL;
 
-SELECT ship_country, COUNT(*)
-FROM orders
-WHERE freight > 50
-GROUP BY ship_country
-ORDER BY COUNT(*) DESC
+-- 5
+SELECT country, COUNT(supplier_id) FROM suppliers
+GROUP BY country ORDER BY COUNT(supplier_id) DESC;
 
-SELECT category_id, SUM(units_in_stock)
-FROM products
-GROUP BY category_id
-ORDER BY SUM(units_in_stock) DESC
-LIMIT 5
-
-SELECT ship_country, SUM(freight)
-FROM orders
+-- 6
+SELECT ship_country, SUM(freight) FROM orders
 WHERE ship_region IS NOT NULL
-GROUP BY ship_country
-HAVING SUM(freight) > 2750
-ORDER BY SUM(freight) DESC
+GROUP BY ship_country HAVING SUM(freight) > 2750
+ORDER BY SUM(freight) DESC;
 
-SELECT country
-FROM customers
+-- 7
+SELECT country FROM customers
 UNION
-SELECT country
-FROM suppliers
-ORDER BY country
+SELECT country FROM employees
+ORDER BY country ASC;
 
-SELECT country 
-FROM customers
+-- 8
+SELECT country FROM customers
 INTERSECT
-SELECT country
-FROM suppliers
+SELECT country FROM suppliers
 INTERSECT
-SELECT country
-FROM employees
+SELECT country FROM employees;
 
-SELECT country 
-FROM customers
+-- 9
+SELECT country FROM customers
 INTERSECT
-SELECT country
-FROM suppliers
+SELECT country FROM suppliers
 EXCEPT
-SELECT country
-FROM employees
+SELECT country FROM employees;
