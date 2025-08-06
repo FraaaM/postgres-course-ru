@@ -1,15 +1,16 @@
-CREATE TABLE teacher
-(
+CREATE TABLE teacher (
 	teacher_id serial,
-	first_name varchar,
-	last_name varchar,
+	first_name varchar(64),
+	last_name varchar(64),
 	birthday date,
-	phone varchar,
+	phone varchar(64),
 	title varchar
 );
 
+DROP TABLE teacher
+
 ALTER TABLE teacher
-ADD COLUMN middle_name varchar;
+ADD COLUMN middle_name varchar(64);
 
 ALTER TABLE teacher
 DROP COLUMN middle_name;
@@ -20,18 +21,18 @@ RENAME birthday TO birth_date;
 ALTER TABLE teacher
 ALTER COLUMN phone SET DATA TYPE varchar(32);
 
-CREATE TABLE exam
-(
+CREATE TABLE exam (
 	exam_id serial,
 	exam_name varchar(256),
 	exam_date date
 );
 
 INSERT INTO exam (exam_name, exam_date)
-VALUES ('exam 1', '2018-01-10'),
-       ('exam 2', '2018-02-10'),
-       ('exam 3', '2018-03-10');
+VALUES
+('rus','12-12-2023'),
+('eng','12-1-2025'),
+('math','12-1-2023')
 
-SELECT * FROM exam;
+SELECT * FROM exam
 
-TRUNCATE TABLE exam RESTART IDENTITY;
+TRUNCATE TABLE exam RESTART IDENTITY
