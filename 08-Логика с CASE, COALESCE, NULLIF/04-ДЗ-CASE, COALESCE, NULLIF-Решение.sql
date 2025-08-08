@@ -19,7 +19,6 @@ SELECT contact_name, COALESCE(order_id::text, 'no orders') AS order_id
 FROM customers
 LEFT JOIN orders USING(customer_id)
 WHERE order_id IS NULL
-extension
 
 -- 4
 SELECT CONCAT(last_name, ' ', first_name) AS full_name, 
